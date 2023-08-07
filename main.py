@@ -20,7 +20,7 @@ def check_valid(platform, difficulty):
 # 커밋 내역 객체를 입력받음
 # 적절한 난이도라면 스터디 레포지터리에 커밋을 수행
 def commit_if_valid(commit):
-    for file in latest_commit['files']:
+    for file in commit['files']:
         # 파일 이름을 /를 구분자로 파싱해서 리스트에 담기
         full_filename = str(file['filename']).split('/')
 
@@ -39,7 +39,7 @@ def commit_if_valid(commit):
             date_string = datetime.now().strftime('%Y.%m/%d')
 
             # 확장자를 제거한 파일명 (= 문제 이름)으로 커밋 메시지 생성
-            without_extension = filename.rsplit('.', 1)[:-1]
+            without_extension = '.'.join(filename.rsplit('.', 1)[:-1])
             commit_message = f'{platform} - {without_extension}'
             # 경로를 포함한 업로드 파일명
             filename = f'{date_string}/{filename}'

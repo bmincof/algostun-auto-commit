@@ -7,11 +7,11 @@ from datetime import datetime
 
 # 푼 문제가 지정한 난이도에 포함된다면 True, 아니면 False
 def check_valid(platform, difficulty):
-    if platform == '백준' and difficulty in ['Silver', 'Gold']:
+    if platform == '백준' and difficulty not in ['Bronze']:
         return True
-    if platform == '프로그래머스' and difficulty in ['lv2']:
+    if platform == '프로그래머스' and difficulty not in ['lv1']:
         return True
-    if platform == 'SWEA' and difficulty in ['D4']:
+    if platform == 'SWEA' and difficulty not in ['D1', 'D2']:
         return True
     return False
 

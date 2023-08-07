@@ -38,8 +38,12 @@ def commit_if_valid(commit):
             # 오늘 날짜를 yyyy.mm/dd 형식의 문자열로 저장
             date_string = datetime.now().strftime('%Y.%m/%d')
 
-            commit_message = f'{platform} - {filename}'
-            filename = f'{date_string}/{full_filename[-1]}'
+            # 확장자를 제거한 파일명 (= 문제 이름)으로 커밋 메시지 생성
+            without_extension = filename.rsplit('.', 1)[:-1]
+            commit_message = f'{platform} - {without_extension}'
+            # 경로를 포함한 업로드 파일명
+            filename = f'{date_string}/{filename}'
+
             raw_code = requests.get(file['raw_url']).text
             # 문제풀이 코드를 base64로 인코딩
             base64_code = base64.b64encode(raw_code.encode()).decode('utf-8')

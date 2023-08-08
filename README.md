@@ -1,4 +1,4 @@
-# algostun-auto-commit
+# algostun-auto-commit [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fbmincof%2Falgostun&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 반복적이고 잊기 쉬운 알고리즘 스터디 커밋을 자동으로 해주는 스크립트입니다. 백준 허브를 이용하여 알고리즘 문제 풀이를 관리하고 있다면 자동으로 스터디 커밋 형식에 맞게 푼 문제 파일을 업로드 할 수 있습니다.
 

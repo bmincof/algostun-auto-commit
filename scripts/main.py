@@ -55,6 +55,7 @@ def commit_if_valid(commit):
             response = requests.put(
                 f'https://api.github.com/repos/{nickname}/algostun/contents/{nickname}/{filename}',
                 headers=headers, json=request_body)
+            print(response.text)
             
 
 # main 실행

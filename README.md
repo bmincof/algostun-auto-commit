@@ -9,7 +9,7 @@
 
    ❗ 스터디에서 정한 범위 난이도는 풀이해도 커밋되지 않습니다.
 
-   기준: 백준은 solved.ac기준 실버, 골드 난이도 / 프로그래머스는 Level 2 / SWEA는 D4
+   기준: 백준은 solved.ac기준 실버 이상 / 프로그래머스는 Level 2 이상 / SWEA는 D3 이상
 
    ❗ 최근에 등록된 문제는 unrated로 분류되어 제대로 작동하지 않을 수 있습니다.
 
@@ -23,47 +23,73 @@
     - yml파일의 이름은 상관없습니다.
       <br>
 
-      ```YAML
-      name: algostun_auto_commit
-      on:
-        push:
-          branches:
-            - 'main'
-          paths:
-            - '**.py'
-            - '**.c'
-            - '**.cpp'
-            - '**.java'
+```YAML
+name: algostun_auto_commit
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '**.py'
+      - '**.c'
+      - '**.cpp'
+      - '**.java'
 
-      env:
-        NICKNAME: {깃허브 닉네임}
-        EMAIL: {깃허브 이메일}
-        REPOSITORY: {백준 허브 연동 레포지터리}
+env:
+  NICKNAME: {깃허브 닉네임}
+  EMAIL: {깃허브 이메일}
+  REPOSITORY: {백준 허브 연동 레포지터리}
 
-      jobs:
-        build:
-          runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-          steps:
-            - uses: actions/checkout@v3
-              with:
-                repository: bmincof/algostun-auto-commit
-                token: ${{ secrets.ACTIONS_KEY }}
-            - run: ls
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: bmincof/algostun-auto-commit
+          token: ${{ secrets.ACTIONS_KEY }}
 
-            - uses: actions/setup-python@v4
-              with:
-                python-version: '3.10'
-                cache: 'pip' # caching pip dependencies
-            - run: pip install -r requirements.txt
-            - run: python main.py ${{ secrets.ACTIONS_KEY }} ${{ env.NICKNAME }} ${{ env.EMAIL }} ${{ env.REPOSITORY }}
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip' # caching pip dependencies
+      - run: pip install -r requirements.txt
+      - run: python scripts/main.py ${{ secrets.ACTIONS_KEY }} ${{ env.NICKNAME }} ${{ env.EMAIL }} ${{ env.REPOSITORY }}
 
-      ```
+```
 
-3.  깃허브 레포지터리 내의 settings -> Secrets and variables -> Actions에 Repository secrets에 ACTIONS_KEY라는 이름으로 발급받은 Personal Access Token을 등록합니다.
+3. `Github profile` -> `settings` -> `Developer settings` -> `Personal access tokens`에서 토큰을 생성합니다.
+
+<div style="display: flex; align-items: start; justify-content: space-around">
+
+<img src="https://github.com/bmincof/algostun-auto-commit/assets/104330984/f20a27e3-766a-4e75-81f3-5b3d0d9c597d" width="200"/>
+<img src="https://github.com/bmincof/algostun-auto-commit/assets/104330984/d05e68f2-9e62-45c2-b679-d51ae5ee0481" width="200"/>
+<img src="https://github.com/bmincof/algostun-auto-commit/assets/104330984/84230b50-16f0-49f1-8bad-0f1a44eff732" width="200"/>
+
+</div>
+
+<br>
+
+4. 백준 허브와 연동된 레포지터리에서
+   `settings` -> `Secrets and variables` -> `Actions` -> `New repository secret`로 이동합니다.
+
+5. Name은 `ACTIONS_KEY`로 Secret에는 발급받은 `Personal access token`을 입력하고 secret을 등록합니다.
+
+<img src="https://github.com/bmincof/algostun-auto-commit/assets/104330984/4446895a-b375-44d5-a762-9b0ba7becdf5"/>
+
+<br>
+
+<div style="display: flex; align-items: start; justify-content: space-around">
+
+<img src="https://github.com/bmincof/algostun-auto-commit/assets/104330984/50275f21-db47-43b1-b7b3-92edde50867e" width="200"/>
+<img src="https://github.com/bmincof/algostun-auto-commit/assets/104330984/104d99b2-8e07-4315-afa4-be29194f1cb7" width="400"/>
+
+</div>
 
 ### 프로젝트에 기여하는 방법
 
 - 기능 추가 요청, 버그 제보 등은 Issues를 통해 남겨주시거나 fork 후 직접 수정하여 Pull Request 남겨주세요
 - 그 외 코드 개선, 문서 수정 등의 작업은 fork 후 변경사항 Pull Request 남겨주세요
 - 해당 프로젝트 기능 외의 스터디 편의를 위한 기능도 환영합니다
+- PR 외 이메일 등으로 연락주셔도 됩니다

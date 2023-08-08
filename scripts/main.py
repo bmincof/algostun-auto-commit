@@ -8,12 +8,12 @@ from datetime import datetime
 # 푼 문제가 지정한 난이도에 포함된다면 True, 아니면 False
 def check_valid(platform, difficulty):
     if platform == '백준' and difficulty not in ['Bronze']:
-        return False
+        return True
     if platform == '프로그래머스' and difficulty not in ['lv1']:
-        return False
+        return True
     if platform == 'SWEA' and difficulty not in ['D1', 'D2']:
-        return False
-    return True
+        return True
+    return False
 
 
 # 가장 최근 커밋 내역을 파싱하여 스터디에 커밋할 난이도인지 체크
@@ -55,7 +55,6 @@ def commit_if_valid(commit):
             response = requests.put(
                 f'https://api.github.com/repos/{nickname}/algostun/contents/{nickname}/{filename}',
                 headers=headers, json=request_body)
-            print(response.text)
             
 
 # main 실행

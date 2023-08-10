@@ -19,7 +19,7 @@ def check_valid(platform, difficulty):
 # 가장 최근 커밋 내역을 파싱하여 스터디에 커밋할 난이도인지 체크
 # 커밋 내역 객체를 입력받음
 # 적절한 난이도라면 스터디 레포지터리에 커밋을 수행
-def commit_if_valid(commit):
+def commit_if_valid(commit, ref):
     for file in commit['files']:
         # 파일 이름을 /를 구분자로 파싱해서 리스트에 담기
         full_filename = str(file['filename']).split('/')
@@ -49,7 +49,7 @@ def commit_if_valid(commit):
             base64_code = base64.b64encode(raw_code.encode()).decode('utf-8')
 
             request_body = {'message': commit_message, 'committer': {'name': nickname, 'email': email},
-                           'author': {'name': nickname, 'email': email}, 'content': base64_code}
+                           'author': {'name': nickname, 'email': email}, 'content': base64_code, 'ref': ref}
 
             # 커밋 생성 요청 보내기
             response = requests.put(
@@ -59,7 +59,7 @@ def commit_if_valid(commit):
 
 # main 실행
 # 환경변수 할당
-(token, nickname, email, repository) = (sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+(token, nickname, email, repository, ref) = (sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
 
 # HTTP Request 헤더 설정
 headers = {'Authorization': f'Bearer {token}', 'X-GitHub-Api-Version': '2022-11-28',
@@ -72,4 +72,4 @@ api_response = json.loads(requests.get(f'https://api.github.com/repos/{nickname}
 latest_commit = json.loads(requests.get(api_response['url'], headers=headers).text)
 
 # 가장 최신 커밋으로부터 문제이름, 코드 추출
-commit_if_valid(latest_commit)
+commit_if_valid(latest_commit, ref)

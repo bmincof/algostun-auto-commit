@@ -13,7 +13,7 @@ def check_valid(platform, difficulty):
         return True
     if platform == 'SWEA' and difficulty not in ['D1', 'D2']:
         return True
-    return False
+    return True
 
 
 # 가장 최근 커밋 내역을 파싱하여 스터디에 커밋할 난이도인지 체크

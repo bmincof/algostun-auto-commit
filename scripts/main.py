@@ -53,7 +53,7 @@ def commit_if_valid(commit, ref):
 
             # 커밋 생성 요청 보내기
             response = requests.put(
-                f'https://api.github.com/repos/{nickname}/algostun/contents/{nickname}/{filename}',
+                f'https://api.github.com/repos/{nickname}/git-test/contents/{nickname}/{filename}',
                 headers=headers, json=request_body)
             
 

@@ -55,6 +55,7 @@ def commit_if_valid(commit, ref):
             response = requests.put(
                 f'https://api.github.com/repos/{nickname}/git-test/contents/{nickname}/{filename}',
                 headers=headers, json=request_body)
+            print(response.text)
             
 
 # main 실행

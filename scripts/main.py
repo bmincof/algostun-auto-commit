@@ -49,11 +49,11 @@ def commit_if_valid(commit, ref):
             base64_code = base64.b64encode(raw_code.encode()).decode('utf-8')
 
             request_body = {'message': commit_message, 'committer': {'name': nickname, 'email': email},
-                           'author': {'name': nickname, 'email': email}, 'content': base64_code}
+                           'author': {'name': nickname, 'email': email}, 'content': base64_code, 'branch': ref}
 
             # 커밋 생성 요청 보내기
             response = requests.put(
-                f'https://api.github.com/repos/{nickname}/git-test/contents/{nickname}/{filename}?branch={ref}',
+                f'https://api.github.com/repos/{nickname}/git-test/contents/{nickname}/{filename}',
                 headers=headers, json=request_body)
             print(response.text)
             
